@@ -1,0 +1,7 @@
+/results_opencpn/
+*~
+*.patch
+*.rpm
+*.zip
+.scons*
+
