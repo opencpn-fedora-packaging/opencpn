@@ -167,9 +167,6 @@ mkdir -p %{buildroot}%{_bindir}
 %docdir %{_datadir}/%{name}/doc
 %doc %{_datadir}/%{name}/doc/help_web.html
 %doc %{_datadir}/%{name}/CoC-909_2013-InlandECDIS_20170308s.pdf
-#%exclude %{_datadir}/%{name}/doc/readme*
-#%doc %{_datadir}/%{name}/doc/help_en_US.html
-#%doc %{_datadir}/%{name}/doc/images/*
 
 %docdir %{_datadir}/doc/%{name}
 %doc %{_datadir}/doc/%{name}/copyright
