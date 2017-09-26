@@ -1,7 +1,7 @@
 Name: opencpn
 Summary: Chartplotter and GPS navigation software
 Version: 4.8.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 
 Source0: https://github.com/OpenCPN/OpenCPN/archive/v4.8.0.zip
@@ -125,7 +125,7 @@ World Magnetic Model plugin for OpenCPN
 tar --verbose --extract --file %{SOURCE1} --strip-components 2 --directory data/gshhs
 
 %build
-%cmake -DBUNDLE_GSHHS=FULL -DBUNDLE_TCDATA=ON
+%cmake -DBUNDLE_GSHHS=FULL -DBUNDLE_TCDATA=ON -DUSE_GARMINHOST=OFF
 make
 
 %install
@@ -139,7 +139,7 @@ mkdir -p %{buildroot}%{_bindir}
 %find_lang %{name}-wmm_pi
 
 %files -f %{name}.lang
-/usr/bin/opencpn
+%{_bindir}/opencpn
 %dir %{_libdir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/48x48/apps/%{name}.png
