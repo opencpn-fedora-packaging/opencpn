@@ -123,14 +123,18 @@ World Magnetic Model plugin for OpenCPN
 %patch0 -p1
 %patch1 -p1
 tar --verbose --extract --file %{SOURCE1} --strip-components 2 --directory data/gshhs
+mkdir build
 
 %build
-%cmake -DBUNDLE_GSHHS=FULL -DBUNDLE_TCDATA=ON -DUSE_GARMINHOST=OFF
-make
+cd build
+%cmake -DBUILD_SHARED_LIBS:BOOL=OFF -DBUNDLE_GSHHS=FULL -DBUNDLE_TCDATA=ON ..
+%make_build
 
 %install
+cd build
 mkdir -p %{buildroot}%{_bindir}
 %make_install
+desktop-file-validate %{buildroot}/%{_datadir}/applications/opencpn.desktop
 
 %find_lang %{name}
 %find_lang %{name}-chartdldr_pi
