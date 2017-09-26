@@ -5,6 +5,7 @@ Release: 1%{?dist}
 License: GPLv2+
 
 Source0: https://github.com/OpenCPN/OpenCPN/archive/v4.8.0.zip
+Source1: https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/opencpn-gshhs_2.2.4.tar.xz
 Patch0: https://patch-diff.githubusercontent.com/raw/OpenCPN/OpenCPN/pull/885.patch
 Patch1: https://patch-diff.githubusercontent.com/raw/OpenCPN/OpenCPN/pull/887.patch
 
@@ -18,6 +19,7 @@ BuildRequires: mesa-libGL-devel
 BuildRequires: mesa-libGLU-devel
 BuildRequires: portaudio-devel
 BuildRequires: portaudio-devel
+BuildRequires: tar
 BuildRequires: tinyxml-devel
 BuildRequires: wxGTK3-devel
 BuildRequires: xz-devel
@@ -120,9 +122,10 @@ World Magnetic Model plugin for OpenCPN
 %setup0 -n OpenCPN-%{version}
 %patch0 -p1
 %patch1 -p1
+tar --verbose --extract --file %{SOURCE1} --strip-components 2 --directory data/gshhs
 
 %build
-%cmake -DBUNDLE_GSHHS=FULL
+%cmake -DBUNDLE_GSHHS=FULL -DBUNDLE_TCDATA=ON
 make
 
 %install
@@ -151,11 +154,10 @@ mkdir -p %{buildroot}%{_bindir}
 %config %{_datadir}/%{name}/s57data/*.xml
 %{_datadir}/%{name}/s57data/*.png
 
-
-#%dir %{_datadir}/%{name}/tcdata
-#%{_datadir}/%{name}/tcdata/HARMONIC
-#%{_datadir}/%{name}/tcdata/HARMONIC.IDX
-#%doc %{_datadir}/%{name}/tcdata/README*
+%dir %{_datadir}/%{name}/tcdata
+%{_datadir}/%{name}/tcdata/HARMONIC
+%{_datadir}/%{name}/tcdata/HARMONIC.IDX
+%doc %{_datadir}/%{name}/tcdata/README*
 
 %dir %{_datadir}/%{name}/sounds
 %{_datadir}/%{name}/sounds/*.wav
@@ -185,14 +187,14 @@ mkdir -p %{buildroot}%{_bindir}
 %files gshhs-low
 %{_datadir}/%{name}/gshhs/wdb_borders_l.b
 %{_datadir}/%{name}/gshhs/wdb_rivers_l.b
-#%{_datadir}/%{name}/gshhs/poly-l-1.dat
+%{_datadir}/%{name}/gshhs/poly-l-1.dat
 
 %files gshhs-intermediate
 %{_datadir}/%{name}/gshhs/wdb_borders_i.b
 %{_datadir}/%{name}/gshhs/wdb_rivers_i.b
 %{_datadir}/%{name}/gshhs/poly-i-1.dat
 
-%files gshhs-intermediate
+%files gshhs-high
 %{_datadir}/%{name}/gshhs/wdb_borders_h.b
 %{_datadir}/%{name}/gshhs/wdb_rivers_h.b
 %{_datadir}/%{name}/gshhs/poly-h-1.dat
