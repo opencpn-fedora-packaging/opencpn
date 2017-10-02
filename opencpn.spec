@@ -1,7 +1,7 @@
 Name: opencpn
 Summary: Chartplotter and GPS navigation software
 Version: 4.8.0
-Release: 2%{?dist}
+Release: 1%{?dist}
 License: GPLv2+
 
 Source0: https://github.com/OpenCPN/OpenCPN/archive/v4.8.0.zip
@@ -11,6 +11,7 @@ Patch1: https://patch-diff.githubusercontent.com/raw/OpenCPN/OpenCPN/pull/887.pa
 
 BuildRequires: bzip2-devel
 BuildRequires: cmake
+BuildRequires: desktop-file-utils
 BuildRequires: elfutils-libelf-devel
 BuildRequires: expat-devel
 BuildRequires: gettext
@@ -142,7 +143,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/opencpn.desktop
 %find_lang %{name}-grib_pi
 %find_lang %{name}-wmm_pi
 
-%files -f %{name}.lang
+%files -f build/%{name}.lang
 %{_bindir}/opencpn
 %dir %{_libdir}/%{name}
 %{_datadir}/applications/%{name}.desktop
@@ -205,7 +206,7 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/opencpn.desktop
 %{_datadir}/%{name}/gshhs/wdb_rivers_f.b
 %{_datadir}/%{name}/gshhs/poly-f-1.dat
 
-%files plugin-chartdldr -f %{name}-chartdldr_pi.lang
+%files plugin-chartdldr -f build/%{name}-chartdldr_pi.lang
 %{_libdir}/%{name}/libchartdldr_pi.so
 %dir %{_datadir}/%{name}/plugins/chartdldr_pi/data
 %config %{_datadir}/%{name}/plugins/chartdldr_pi/data/*.xml
@@ -215,17 +216,17 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/opencpn.desktop
 %docdir %{_datadir}/%{name}/plugins/chartdldr_pi/data/doc
 %doc %{_datadir}/%{name}/plugins/chartdldr_pi/data/doc/*
 
-%files plugin-dashboard -f %{name}-dashboard_pi.lang
+%files plugin-dashboard -f build/%{name}-dashboard_pi.lang
 %{_libdir}/%{name}/libdashboard_pi.so
 %dir %{_datadir}/%{name}/plugins/dashboard_pi/data
 %{_datadir}/%{name}/plugins/dashboard_pi/data/*.svg
 
-%files plugin-grib -f %{name}-grib_pi.lang
+%files plugin-grib -f build/%{name}-grib_pi.lang
 %{_libdir}/%{name}/libgrib_pi.so
 %dir %{_datadir}/%{name}/plugins/grib_pi/data
 %{_datadir}/%{name}/plugins/grib_pi/data/*.svg
 
-%files plugin-wmm -f %{name}-wmm_pi.lang
+%files plugin-wmm -f build/%{name}-wmm_pi.lang
 %{_libdir}/%{name}/libwmm_pi.so
 %dir %{_datadir}/%{name}/plugins/wmm_pi/data
 %config %{_datadir}/%{name}/plugins/wmm_pi/data/*.COF
