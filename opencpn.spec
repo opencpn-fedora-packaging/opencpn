@@ -1,7 +1,7 @@
 Name: opencpn
 Summary: Chartplotter and GPS navigation software
 Version: 4.8.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv2+
 
 Source0: https://github.com/OpenCPN/OpenCPN/archive/v4.8.0.zip
@@ -89,8 +89,8 @@ Chart downloading plugin for OpenCPN
 
 %package plugin-chartdldr-doc
 Summary: Documentation for chart downloading plugin for OpenCPN
-Requires: %{name}%{_isa} = %{version}-%{release}
-Supplements: %{name}%{_isa} = %{version}-%{release}
+Requires: %{name}-plugin-chartdldr%{_isa} = %{version}-%{release}
+Enhances: %{name}-plugin-chartdldr%{_isa} = %{version}-%{release}
 
 %description plugin-chartdldr-doc
 Documentation for chart downloading plugin for OpenCPN
@@ -218,13 +218,11 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/opencpn.desktop
 
 %files plugin-dashboard -f build/%{name}-dashboard_pi.lang
 %{_libdir}/%{name}/libdashboard_pi.so
-%dir %{_datadir}/%{name}/plugins/dashboard_pi/data
-%{_datadir}/%{name}/plugins/dashboard_pi/data/*.svg
+%{_datadir}/%{name}/plugins/dashboard_pi/data
 
 %files plugin-grib -f build/%{name}-grib_pi.lang
 %{_libdir}/%{name}/libgrib_pi.so
-%dir %{_datadir}/%{name}/plugins/grib_pi/data
-%{_datadir}/%{name}/plugins/grib_pi/data/*.svg
+%{_datadir}/%{name}/plugins/grib_pi
 
 %files plugin-wmm -f build/%{name}-wmm_pi.lang
 %{_libdir}/%{name}/libwmm_pi.so
